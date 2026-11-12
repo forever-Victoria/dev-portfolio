@@ -62,9 +62,30 @@ function profileSavePlugin() {
   };
 }
 
+// GitHub Pages project sites live under /<repo>/ — every built asset URL has
+// to be prefixed, otherwise the page loads but all JS/CSS 404s (blank screen).
+// Override with VITE_BASE=/ for a user/org page (username.github.io).
+const BUILD_BASE = process.env.VITE_BASE || '/dev-portfolio/';
+
+/**
+ * SPA deep links (e.g. /dev-portfolio/about) 404 on GitHub Pages; serving the
+ * app's index.html as 404.html lets the client-side router take over.
+ */
+function spaFallbackPlugin(outDir) {
+  return {
+    name: 'portfolio-spa-fallback',
+    apply: 'build',
+    closeBundle() {
+      const dir = path.resolve(outDir);
+      fs.copyFileSync(path.join(dir, 'index.html'), path.join(dir, '404.html'));
+    },
+  };
+}
+
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react(), profileSavePlugin()],
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? BUILD_BASE : '/',
+  plugins: [react(), profileSavePlugin(), spaFallbackPlugin('build')],
   server: {
     port: 3000,
     open: true,
@@ -78,4 +99,4 @@ export default defineConfig({
     setupFiles: './src/setupTests.js',
     css: true,
   },
-});
+}));

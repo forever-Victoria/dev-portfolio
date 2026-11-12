@@ -1,0 +1,12 @@
+const sleep=(ms)=>new Promise(r=>setTimeout(r,ms));
+const t=await (await fetch('http://127.0.0.1:9225/json/list')).json();
+const p=t.find(x=>x.type==='page');
+const ws=new WebSocket(p.webSocketDebuggerUrl);
+let id=0;const pend=new Map();
+ws.onmessage=e=>{const m=JSON.parse(e.data);if(m.id&&pend.has(m.id)){pend.get(m.id)(m);pend.delete(m.id);}};
+await new Promise(r=>ws.onopen=r);
+const send=(method,params={})=>new Promise(res=>{id+=1;pend.set(id,res);ws.send(JSON.stringify({id,method,params}));});
+const ev=(expr)=>send('Runtime.evaluate',{expression:expr,awaitPromise:true,returnByValue:true}).then(r=>r.result.result?.value);
+console.log('fetch status:', await ev(`fetch('/dev-portfolio/assets/index-CFVsrzMt.js').then(r=>r.status+' '+r.headers.get('content-type'))`));
+console.log('url:', await ev('location.href'));
+ws.close();

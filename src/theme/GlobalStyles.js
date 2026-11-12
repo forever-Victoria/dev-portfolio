@@ -76,7 +76,7 @@ const GlobalStyles = createGlobalStyle`
     background-image:
       radial-gradient(120% 90% at 50% 40%, rgba(8, 8, 16, 0) 30%, rgba(8, 8, 16, 0.55) 100%),
       linear-gradient(rgba(10, 10, 20, 0.30), rgba(10, 10, 20, 0.45)),
-      url('/images/winter-night.jpg');
+      url('${import.meta.env.BASE_URL}images/winter-night.jpg');
     background-size: cover, cover, cover;
     background-position: center, center, center;
     background-attachment: fixed;

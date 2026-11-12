@@ -567,7 +567,12 @@ This app uses client-side routing (`BrowserRouter`), so a static host must serve
 /*  /index.html  200
 ```
 
-- **GitHub Pages** — copy `build/index.html` to `build/404.html` after building.
+- **GitHub Pages** — `.github/workflows/deploy.yml` builds and deploys on every
+  push to `master`/`main`. Enable it once under **Settings → Pages → Source =
+  GitHub Actions**, and make sure `origin` points at **your** repository (not the
+  template). The workflow copies `index.html` to `404.html` (via the
+  `portfolio-spa-fallback` Vite plugin) and sets `VITE_BASE` from the repo name,
+  so project pages (`/<repo>/`) and user pages (`<user>.github.io`) both work.
 
 ## Notable Portfolios made using this template
 

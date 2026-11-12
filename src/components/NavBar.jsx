@@ -51,7 +51,7 @@ const NavBar = () => {
     >
       <Container>
         {navData?.logo && (
-          <Navbar.Brand href="/">
+          <Navbar.Brand href={import.meta.env.BASE_URL}>
             <img
               src={navData?.logo?.source}
               className="d-inline-block align-top"

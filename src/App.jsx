@@ -21,7 +21,7 @@ function App() {
         <GlobalStyles />
         <NightSky />
         <div className="App">
-          <BrowserRouter>
+          <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '') || '/'}>
             <MainApp />
           </BrowserRouter>
         </div>

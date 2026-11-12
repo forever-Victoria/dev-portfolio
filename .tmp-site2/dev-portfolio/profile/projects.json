@@ -1,0 +1,150 @@
+{
+    "projects" : [
+        {
+            "image" : "images/projects/portfolio-poster.png",
+            "title": "开发者作品集网站",
+            "bodyText": "- 使用 **React** 打造的开发者个人作品集网站\n - 完全可定制、数据与图片动态配置，改起来非常方便\n - 支持深色模式",
+            "links": [
+                {
+                    "text": "GitHub",
+                    "href": "https://github.com/mayankagarwal09/dev-portfolio"
+                },
+                {
+                    "text": "在线预览",
+                    "href": "https://mayankagarwal.me"
+                }
+            ],
+            "tags" : [
+                "React",
+                "Portfolio",
+                "JavaScript"
+            ]
+        },
+        {
+            "image" : "images/projects/caaring-poster.png",
+            "title": "Caaring - 拼车应用",
+            "bodyText": "- 使用 **Django** 为 **VIT** 学生开发的拼车 Web 应用，用户可以发起拼车或申请加入已有行程\n - 使用 **SendGrid** 实现用户认证与密码重置\n - 通过 **gunicorn** 部署在 **Heroku** 上",
+            "links": [
+                {
+                    "text": "GitHub",
+                    "href": "https://github.com/mayankagarwal09/Caaring"
+                },
+                {
+                    "text": "在线预览",
+                    "href": "http://caaring.herokuapp.com"
+                }
+            ],
+            "tags" : [
+                "Python",
+                "Django",
+                "BootStrap",
+                "SendGrid",
+                "Heroku",
+                "Gunicorn",
+                "VIT"
+            ]
+        },
+        {
+            "image" : "images/projects/quiet-hours-poster.jpg",
+            "title": "Quiet Hours 安静时光",
+            "bodyText": "- 一款在上课时间**自动静音**手机的 Android 应用，专为 **VIT** 学生设计\n - 可选择上课**时段**和**自定义时间**\n - 支持改为震动而不是完全静音",
+            "links": [
+                {
+                    "text": "GitHub",
+                    "href": "https://github.com/mayankagarwal09/QuietHours-Android"
+                }
+            ],
+            "tags" : [
+                "Java",
+                "Android",
+                "Alarm Manager",
+                "VIT"
+            ]
+        },
+        {
+            "title": "加密聊天应用",
+            "bodyText": "- 一款支持实时收发消息的 Android 应用\n - 使用 **RSA** 算法实现端到端加密\n - 使用 **Firebase** 数据库存储消息\n - 支持**指纹锁**保护",
+            "links": [
+                {
+                    "text": "GitHub",
+                    "href": "https://github.com/mayankagarwal09/SecureChatApp"
+                }
+            ],
+            "tags" : [
+                "Java",
+                "Android",
+                "Firebase",
+                "RSA"
+            ]
+        },
+        {
+            "title": "MVVM 示例应用",
+            "bodyText": "- 一款从模拟 API 加载数据的 Android 应用，同时展示 **LinearLayout** 和 **GridLayout RecyclerView** 两种布局\n - 使用 **Room** 数据库和 **NetworkBoundResource** 实现离线支持\n - 采用 **MVVM** 架构",
+            "links": [
+                {
+                    "text": "GitHub",
+                    "href": "https://github.com/mayankagarwal09/mvvm-sample-app"
+                }
+            ],
+            "tags" : [
+                "Kotlin",
+                "Android",
+                "MVVM",
+                "Room",
+                "Coroutines",
+                "Flow",
+                "Hilt-Dagger",
+                "NetworkBoundResource"
+            ]
+        },
+        {
+            "title": "信息流列表应用",
+            "bodyText": "- 一款从**分页** API 加载信息流列表并在 RecyclerView 中展示的 Android 应用\n - 采用 **MVVM** 架构\n - 使用 **Paging 3** 库及其他架构组件",
+            "links": [
+                {
+                    "text": "GitHub",
+                    "href": "https://github.com/mayankagarwal09/Paginated-App-Feeds-List"
+                }
+            ],
+            "tags" : [
+                "Kotlin",
+                "Android",
+                "MVVM",
+                "Paging 3",
+                "Coroutines",
+                "Flow"
+            ]
+        },
+        {
+            "title": "任务清单",
+            "bodyText": "- 使用 **Angular 12** 开发的简易任务管理 Web 应用\n - 通过 **模拟 JSON 服务器** 实现任务的增删改查",
+            "links": [
+                {
+                    "text": "GitHub",
+                    "href": "https://github.com/mayankagarwal09/task-tracker-app"
+                }
+            ],
+            "tags" : [
+                "TypeScript",
+                "Angular 12",
+                "JavaScript"
+            ]
+        },
+        {
+            "title": "图片加密解密工具",
+            "bodyText": "- 使用 **Django** 开发的图片加密解密 Web 应用\n - 采用 **SDES** 算法进行加密与解密",
+            "links": [
+                {
+                    "text": "GitHub",
+                    "href": "https://github.com/mayankagarwal09/img-encrypt-sdes"
+                }
+            ],
+            "tags" : [
+                "Python",
+                "Django",
+                "SDES",
+                "Cryptography"
+            ]
+        }
+    ]
+}
