@@ -9,28 +9,10 @@ import './musicPlayer.css';
 
 // A quiet, looping background track with a frosted-glass note button:
 // the note spins while the music plays and a slash appears when it is paused.
-// Autoplay is usually blocked until the first interaction, so the first
-// pointer/key gesture anywhere on the page starts it — unless the visitor
-// paused the music deliberately, which is remembered across reloads.
-
-const PAUSED_KEY = 'portfolio:bgm-paused';
+// The music is on by default: every load tries to start it immediately, and
+// browsers that block autoplay get unlocked by the first pointer/key gesture
+// anywhere on the page. Pausing is only a per-visit choice, not remembered.
 const VOLUME = 0.35;
-
-function readPaused() {
-  try {
-    return window.localStorage.getItem(PAUSED_KEY) === '1';
-  } catch {
-    return false;
-  }
-}
-
-function persistPaused(paused) {
-  try {
-    window.localStorage.setItem(PAUSED_KEY, paused ? '1' : '0');
-  } catch {
-    // Storage can be unavailable (private mode); the toggle still works.
-  }
-}
 
 function MusicPlayer() {
   const audioRef = useRef(null);
@@ -53,8 +35,6 @@ function MusicPlayer() {
     const audio = audioRef.current;
     if (!audio) return undefined;
     audio.volume = VOLUME;
-
-    if (readPaused()) return undefined;
 
     playAudio();
 
@@ -84,10 +64,8 @@ function MusicPlayer() {
     const audio = audioRef.current;
     if (!audio) return;
     if (audio.paused) {
-      persistPaused(false);
       playAudio();
     } else {
-      persistPaused(true);
       audio.pause();
     }
   };
