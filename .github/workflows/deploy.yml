@@ -28,8 +28,16 @@ jobs:
           node-version: 22
           cache: npm
 
+      # npm ci is exact, but it refuses to run when package-lock.json lags
+      # behind package.json (e.g. after a dependency bump without a local
+      # `npm install`). Fall back to a plain install so a stale lockfile
+      # cannot block a deploy, and surface it as a warning annotation.
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci --no-audit --no-fund || {
+            echo "::warning::package-lock.json is out of sync with package.json — falling back to npm install. Run \`npm install\` locally and commit the updated lockfile."
+            npm install --no-audit --no-fund
+          }
 
       # Project pages live under /<repo>/, user/org pages at the root.
       # Deriving it from the repo name keeps vite.config.js correct even if
