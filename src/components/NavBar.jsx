@@ -1,8 +1,8 @@
 import { Navbar, Nav, Container } from 'react-bootstrap';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled, { ThemeContext } from 'styled-components';
-import endpoints from '../constants/endpoints';
+import useProfile from '../hooks/useProfile';
 import ThemeToggler from './ThemeToggler';
 
 const styles = {
@@ -37,17 +37,9 @@ const InternalNavLink = styled(NavLink)`
 
 const NavBar = () => {
   const theme = useContext(ThemeContext);
-  const [data, setData] = useState(null);
+  const { data } = useProfile();
+  const navData = data.navbar;
   const [expanded, setExpanded] = useState(false);
-
-  useEffect(() => {
-    fetch(endpoints.navbar, {
-      method: 'GET',
-    })
-      .then((res) => res.json())
-      .then((res) => setData(res))
-      .catch((err) => err);
-  }, []);
 
   return (
     <Navbar
@@ -58,15 +50,15 @@ const NavBar = () => {
       expanded={expanded}
     >
       <Container>
-        {data?.logo && (
+        {navData?.logo && (
           <Navbar.Brand href="/">
             <img
-              src={data?.logo?.source}
+              src={navData?.logo?.source}
               className="d-inline-block align-top"
               alt="main logo"
               style={
-                data?.logo?.height && data?.logo?.width
-                  ? { height: data?.logo?.height, width: data?.logo?.width }
+                navData?.logo?.height && navData?.logo?.width
+                  ? { height: navData?.logo?.height, width: navData?.logo?.width }
                   : styles.logoStyle
               }
             />
@@ -79,10 +71,10 @@ const NavBar = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto" />
           <Nav>
-            {data
-              && data.sections?.map((section, index) => (section?.type === 'link' ? (
+            {navData?.sections?.map((section, index) => (
+              section?.type === 'link' ? (
                 <ExternalNavLink
-                  key={section.title}
+                  key={`ext-${index}`}
                   href={section.href}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -90,20 +82,21 @@ const NavBar = () => {
                   className="navbar__link"
                   theme={theme}
                 >
-                  {section.title}
+                  <span data-edit={`navbar.sections.${index}.title`}>{section.title}</span>
                 </ExternalNavLink>
               ) : (
                 <InternalNavLink
-                  key={section.title}
+                  key={`int-${index}`}
                   onClick={() => setExpanded(false)}
                   end={index === 0}
                   className="navbar__link"
                   to={section.href}
                   theme={theme}
                 >
-                  {section.title}
+                  <span data-edit={`navbar.sections.${index}.title`}>{section.title}</span>
                 </InternalNavLink>
-              )))}
+              )
+            ))}
           </Nav>
           <ThemeToggler
             onClick={() => setExpanded(false)}

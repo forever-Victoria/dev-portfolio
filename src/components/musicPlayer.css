@@ -1,0 +1,131 @@
+/* Frosted-glass background-music toggle.
+   Pinned above the editor FAB in the bottom-right corner: a blurred,
+   translucent circle with a note that spins while playing. When paused the
+   note dims and a diagonal slash fades in. */
+
+.bgm-audio {
+  display: none;
+}
+
+.bgm-toggle {
+  position: fixed;
+  right: 24px;
+  bottom: 92px;
+  z-index: 1100;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(18, 18, 26, 0.38);
+  backdrop-filter: blur(18px) saturate(170%);
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
+  color: #fff;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  cursor: pointer;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.25s var(--ease, ease),
+    background-color 0.25s var(--ease, ease),
+    border-color 0.25s var(--ease, ease),
+    box-shadow 0.25s var(--ease, ease);
+}
+
+.bgm-toggle:hover {
+  transform: translateY(-2px) scale(1.04);
+  background: rgba(18, 18, 26, 0.52);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.34);
+}
+
+.bgm-toggle:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.bgm-toggle.is-playing {
+  border-color: color-mix(in srgb, var(--accent) 55%, rgba(255, 255, 255, 0.25));
+}
+
+.bgm-toggle:disabled {
+  cursor: default;
+  opacity: 0.45;
+  transform: none;
+}
+
+/* ---- Note icon ---------------------------------------------------- */
+
+.bgm-toggle__note {
+  position: relative;
+  z-index: 1;
+  width: 28px;
+  height: 28px;
+  opacity: 0.62;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
+  transition: opacity 0.25s var(--ease, ease);
+}
+
+.bgm-toggle.is-playing .bgm-toggle__note {
+  opacity: 1;
+  animation: bgm-note-spin 4.8s linear infinite;
+}
+
+@keyframes bgm-note-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---- Pause slash -------------------------------------------------- */
+
+.bgm-toggle__slash {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: scale(0.72) rotate(-10deg);
+  pointer-events: none;
+  transition:
+    opacity 0.2s var(--ease, ease),
+    transform 0.25s var(--ease, ease);
+}
+
+.bgm-toggle:not(.is-playing) .bgm-toggle__slash {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.bgm-toggle__slash-base,
+.bgm-toggle__slash-line {
+  stroke-linecap: round;
+}
+
+.bgm-toggle__slash-base {
+  stroke: rgba(9, 9, 14, 0.55);
+  stroke-width: 4.6;
+}
+
+.bgm-toggle__slash-line {
+  stroke: #ffffff;
+  stroke-width: 2.2;
+}
+
+/* Keep clear of the editor FAB on narrow screens. */
+@media (max-width: 560px) {
+  .bgm-toggle {
+    right: 16px;
+    bottom: 88px;
+    width: 48px;
+    height: 48px;
+  }
+}

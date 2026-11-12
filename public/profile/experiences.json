@@ -1,33 +1,33 @@
 {
     "experiences": [
         {
-            "title": "Software Engineer",
-            "subtitle": "XYZ Ltd",
-            "workType": "Full-time",
+            "title": "软件工程师",
+            "subtitle": "某某科技有限公司",
+            "workType": "全职",
             "workDescription": [
-                "Integrated **2** new product.",
-                "Worked on adding **def** to **bcd**. Improved speed by 50%."
+                "参与上线了 **2** 个新产品模块。",
+                "负责为 **bcd** 增加 **def** 功能，性能提升 50%。"
             ],
-            "dateText": "06/20XX – Present"
+            "dateText": "20XX年6月 – 至今"
         },
         {
-            "title": "Software Engineer",
-            "subtitle": "XYZ Ltd",
-            "workType": "Internship",
+            "title": "软件工程师",
+            "subtitle": "某某科技有限公司",
+            "workType": "实习",
             "workDescription": [
-                "Worked on abc."
+                "参与 abc 模块的开发与维护。"
             ],
-            "dateText": "01/20XX – 05/20XX"
+            "dateText": "20XX年1月 – 20XX年5月"
         },
         {
-            "title": "App Developer",
-            "subtitle": "ABC Pvt Ltd",
-            "workType": "Freelance",
+            "title": "应用开发工程师",
+            "subtitle": "某某网络公司",
+            "workType": "自由职业",
             "workDescription": [
-                "Developed the official apps for the startup for both Android and iOS using hybrid framework.",
-                "Done bcd work."
+                "使用混合开发框架为创业公司开发了 Android 和 iOS 双端官方应用。",
+                "完成 bcd 相关开发工作。"
             ],
-            "dateText": "09/20XX – 01/20YY"
+            "dateText": "20XX年9月 – 20YY年1月"
         }
     ]
 }

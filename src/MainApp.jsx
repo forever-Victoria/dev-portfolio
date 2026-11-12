@@ -1,21 +1,13 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import FallbackSpinner from './components/FallbackSpinner';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
-import endpoints from './constants/endpoints';
+import useProfile from './hooks/useProfile';
 
 function MainApp() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetch(endpoints.routes, {
-      method: 'GET',
-    })
-      .then((res) => res.json())
-      .then((res) => setData(res))
-      .catch((err) => err);
-  }, []);
+  const { data } = useProfile();
+  const routes = data.routes;
 
   return (
     <div className="MainApp">
@@ -24,8 +16,8 @@ function MainApp() {
         <Suspense fallback={<FallbackSpinner />}>
           <Routes>
             <Route exact path="/" element={<Home />} />
-            {data
-              && data.sections.map((route) => {
+            {routes
+              && routes.sections.map((route) => {
                 const SectionComponent = React.lazy(() => import(`./components/${route.component}.jsx`));
                 return (
                   <Route

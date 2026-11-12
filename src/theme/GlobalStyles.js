@@ -45,8 +45,8 @@ const GlobalStyles = createGlobalStyle`
 
     /* Type */
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-      'Helvetica Neue', sans-serif;
-    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+      'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+    --font-display: 'Fraunces', 'Noto Serif SC', Georgia, 'Times New Roman', serif;
     --font-mono: 'JetBrains Mono', source-code-pro, Menlo, Monaco, Consolas, monospace;
   }
 
@@ -57,17 +57,31 @@ const GlobalStyles = createGlobalStyle`
   body {
     /* Direct theme values (as the original did) plus Bootstrap's own body
        variables so its reboot rules resolve to the active theme regardless of
-       stylesheet order. A pair of soft accent glows adds depth to the page. */
+       stylesheet order. */
     --bs-body-bg: ${({ theme }) => theme.background};
     --bs-body-color: ${({ theme }) => theme.color};
     background-color: ${({ theme }) => theme.background};
-    background-image:
-      radial-gradient(48rem 48rem at 100% -8%, ${({ theme }) => theme.glow1}, transparent 60%),
-      radial-gradient(42rem 42rem at -10% 8%, ${({ theme }) => theme.glow2}, transparent 55%);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
     color: ${({ theme }) => theme.color};
     transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
+  }
+
+  /* Full-screen winter-night wallpaper: sits above the plain background colour
+     but below all page content. A dark vignette keeps text readable while
+     letting the lantern glow of the photo shine through. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background-image:
+      radial-gradient(120% 90% at 50% 40%, rgba(8, 8, 16, 0) 30%, rgba(8, 8, 16, 0.55) 100%),
+      linear-gradient(rgba(10, 10, 20, 0.30), rgba(10, 10, 20, 0.45)),
+      url('/images/winter-night.jpg');
+    background-size: cover, cover, cover;
+    background-position: center, center, center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    pointer-events: none;
   }
 
   a {

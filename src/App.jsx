@@ -7,6 +7,9 @@ import useDarkMode from './hooks/useDarkMode';
 import AppContext from './AppContext';
 import MainApp from './MainApp';
 import GlobalStyles from './theme/GlobalStyles';
+import NightSky from './components/NightSky';
+import EditorBar from './components/editor/EditorBar';
+import MusicPlayer from './components/MusicPlayer';
 import { lightTheme, darkTheme } from './theme/themes';
 
 function App() {
@@ -16,11 +19,14 @@ function App() {
     <AppContext.Provider value={{ darkMode }}>
       <ThemeProvider theme={darkMode.value ? darkTheme : lightTheme}>
         <GlobalStyles />
+        <NightSky />
         <div className="App">
           <BrowserRouter>
             <MainApp />
           </BrowserRouter>
         </div>
+        <EditorBar />
+        <MusicPlayer />
       </ThemeProvider>
     </AppContext.Provider>
   );

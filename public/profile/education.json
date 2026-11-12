@@ -1,19 +1,19 @@
 {
-    "education":[
+    "education": [
         {
-            "title": "Jun 20XX - Jun 20YY",
-            "cardTitle": "B.Tech, Computer Science",
-            "cardSubtitle":"XYZ University, City",
-            "cardDetailedText": "CGPA - 9.5",
-            "icon" : {
+            "title": "2024年9月 - 2028年6月",
+            "cardTitle": "智能体育工程 本科",
+            "cardSubtitle": "北京体育大学 · 北京市",
+            "cardDetailedText": "GPA - 3.8 / 4.0",
+            "icon": {
                 "src": "images/education/lorem-ipsum.png"
             }
         },
         {
-            "title": "Apr 20XX",
-            "cardTitle": "High School",
-            "cardSubtitle":"ABC School, City",
-            "cardDetailedText": "Marks - 95%"
+            "title": "20XX年4月",
+            "cardTitle": "高中",
+            "cardSubtitle": "某某中学 · 某某市",
+            "cardDetailedText": "高考分数 - 650"
         }
     ]
 }

@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
+import useProfile from '../../hooks/useProfile';
+import EditableMarkdown from '../editor/EditableMarkdown';
 
-const ProjectCard = ({ project, featured = false }) => {
-  const parseBodyText = (text) => <ReactMarkdown>{text}</ReactMarkdown>;
+const ProjectCard = ({ project, featured = false, pathBase }) => {
+  const { editing } = useProfile();
 
   return (
     <article
@@ -18,22 +20,34 @@ const ProjectCard = ({ project, featured = false }) => {
       )}
 
       <div className="project-card__body">
-        <h3 className="project-card__title">{project.title}</h3>
-        <div className="project-card__text">{parseBodyText(project.bodyText)}</div>
+        <h3 className="project-card__title" data-edit={`${pathBase}.title`}>
+          {project.title}
+        </h3>
+        <div className="project-card__text">
+          {editing ? (
+            <EditableMarkdown
+              path={`${pathBase}.bodyText`}
+              value={project.bodyText}
+              label="项目描述（Markdown）"
+            />
+          ) : (
+            <ReactMarkdown>{project.bodyText}</ReactMarkdown>
+          )}
+        </div>
       </div>
 
       <div className="project-card__footer">
         {project?.links?.length > 0 && (
           <div className="project-card__links">
-            {project.links.map((link) => (
+            {project.links.map((link, index) => (
               <a
-                key={link.href}
+                key={`link-${index}`}
                 className="proj-link"
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {link.text}
+                <span data-edit={`${pathBase}.links.${index}.text`}>{link.text}</span>
                 {' '}
                 ↗
               </a>
@@ -42,8 +56,10 @@ const ProjectCard = ({ project, featured = false }) => {
         )}
         {project?.tags?.length > 0 && (
           <div className="project-card__tags">
-            {project.tags.map((tag) => (
-              <span key={tag} className="project-tag">{tag}</span>
+            {project.tags.map((tag, index) => (
+              <span key={`tag-${index}`} className="project-tag">
+                <span data-edit={`${pathBase}.tags.${index}`}>{tag}</span>
+              </span>
             ))}
           </div>
         )}
@@ -54,6 +70,7 @@ const ProjectCard = ({ project, featured = false }) => {
 
 ProjectCard.propTypes = {
   featured: PropTypes.bool,
+  pathBase: PropTypes.string.isRequired,
   project: PropTypes.shape({
     title: PropTypes.string.isRequired,
     bodyText: PropTypes.string.isRequired,

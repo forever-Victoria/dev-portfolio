@@ -1,5 +1,10 @@
 {
-    "name": "Your Name",
-    "roles": ["a Developer", "a Freelancer"],
-    "status": "Open to building cool things"
+    "name": "格涵",
+    "roles": [
+        "一名开发者",
+        "一名独立开发者",
+        "一名终生学习者"
+    ],
+    "status": "欢迎来一起做点有趣的东西",
+    "monogram": "张"
 }

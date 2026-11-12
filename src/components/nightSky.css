@@ -1,0 +1,83 @@
+/* Star layer: between the wallpaper (body::before, z-index -2) and page
+   content, so stars twinkle "in the sky" behind cards and text. */
+.stars-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--star-color, #fff);
+  box-shadow:
+    0 0 4px 1px rgba(255, 255, 255, 0.65),
+    0 0 10px 3px color-mix(in srgb, var(--star-color, #fff) 55%, transparent);
+  opacity: 0.25;
+  animation: star-twinkle var(--twinkle-duration, 3s) ease-in-out infinite alternate;
+}
+
+/* Bigger "shine" stars get a four-point cross flare, like the glowing
+   ornaments in the wallpaper photo. */
+.star--flare::before,
+.star--flare::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--star-color, #fff),
+    transparent
+  );
+  opacity: 0.85;
+}
+
+.star--flare::before {
+  width: 14px;
+  height: 1.5px;
+  transform: translate(-50%, -50%);
+}
+
+.star--flare::after {
+  width: 1.5px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--star-color, #fff),
+    transparent
+  );
+}
+
+@keyframes star-twinkle {
+  0% {
+    opacity: 0.12;
+    transform: scale(0.6);
+  }
+  35% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+  70% {
+    opacity: 0.55;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 0.95;
+    transform: scale(1.1);
+  }
+}
+
+/* Snow canvas floats above the page (including the navbar) but never
+   intercepts clicks. */
+.snowfall-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1035;
+  pointer-events: none;
+}

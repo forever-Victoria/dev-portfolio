@@ -1,48 +1,53 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import PropTypes from 'prop-types';
 import { Fade } from 'react-awesome-reveal';
 import Header from './Header';
-import endpoints from '../constants/endpoints';
+import useProfile from '../hooks/useProfile';
 import FallbackSpinner from './FallbackSpinner';
 import '../css/timeline.css';
 
 function Experience(props) {
   const { header } = props;
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetch(endpoints.experiences, {
-      method: 'GET',
-    })
-      .then((res) => res.json())
-      .then((res) => setData(res.experiences))
-      .catch((err) => err);
-  }, []);
+  const { data } = useProfile();
+  const experiences = data.experiences;
 
   return (
     <>
       <Header title={header} />
-      {data ? (
+      {experiences ? (
         <div className="section-content-container">
           <Fade triggerOnce>
             <div className="tl tl--experience">
-              {data.map((item) => (
-                <div className="tl-item" key={item.title + item.dateText}>
+              {experiences.experiences?.map((item, index) => (
+                <div className="tl-item" key={`exp-${index}`}>
                   <div className="tl-node--dot" />
                   <div className="tl-card">
-                    <div className="tl-date">{item.dateText}</div>
-                    <h3 className="tl-title">{item.title}</h3>
+                    <div className="tl-date" data-edit={`experiences.experiences.${index}.dateText`}>
+                      {item.dateText}
+                    </div>
+                    <h3 className="tl-title" data-edit={`experiences.experiences.${index}.title`}>
+                      {item.title}
+                    </h3>
                     <div className="tl-subtitle">
-                      <span className="accent">{item.subtitle}</span>
-                      {item.workType ? ` · ${item.workType}` : ''}
+                      <span className="accent" data-edit={`experiences.experiences.${index}.subtitle`}>
+                        {item.subtitle}
+                      </span>
+                      {item.workType ? (
+                        <span>
+                          {' · '}
+                          <span data-edit={`experiences.experiences.${index}.workType`}>
+                            {item.workType}
+                          </span>
+                        </span>
+                      ) : ''}
                     </div>
                     <ul className="tl-list">
-                      {item.workDescription.map((point) => (
-                        <li key={point}>
-                          <ReactMarkdown components={{ p: 'span' }}>
-                            {point}
-                          </ReactMarkdown>
+                      {item.workDescription.map((point, pointIndex) => (
+                        <li key={`point-${pointIndex}`}>
+                          <span data-edit={`experiences.experiences.${index}.workDescription.${pointIndex}`}>
+                            <ReactMarkdown components={{ p: 'span' }}>{point}</ReactMarkdown>
+                          </span>
                         </li>
                       ))}
                     </ul>

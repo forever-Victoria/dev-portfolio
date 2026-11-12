@@ -1,10 +1,10 @@
 {
-    "intro": "I love to learn new things and experiment with new technologies.\nThese are some of the major languages, technologies, tools and platforms I have worked with:",
+    "intro": "我喜欢学习新事物、尝试新技术。\n以下是我使用过的一些主要编程语言、技术、工具和平台：",
     "skills": [{
-     
-            "title": "Languages & Databases",
+
+            "title": "编程语言与数据库",
             "items" : [
-     
+
                 {
                     "icon": "images/skills/java.png",
                     "title": "Java"
@@ -27,7 +27,7 @@
                 }
         ]},
         {
-            "title": "Frameworks & Technologies",
+            "title": "框架与技术",
             "items" : [
                 {
                     "icon": "images/skills/android_new.png",
@@ -39,12 +39,12 @@
                 },
                 {
                     "icon": "images/skills/nodejs.png",
-                    "title": "Nodejs"
+                    "title": "Node.js"
                 }
             ]
         },
         {
-            "title" : "Tools & Platforms",
+            "title" : "工具与平台",
             "items": [
                 {
                     "icon": "images/skills/android-studio.png",
